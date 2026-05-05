@@ -27,19 +27,61 @@
     body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--charcoal); line-height: 1.6; }
 
     /* ── NAV ── */
-    nav { padding: 20px 40px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+    nav {
+      padding: 18px 40px; display: flex; align-items: center; gap: 10px;
+      background: #0a3d4a;
+      position: relative; z-index: 10;
+    }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-mark { width: 30px; height: 30px; background: var(--teal); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-    .logo-text { font-size: 15px; font-weight: 700; color: var(--charcoal); letter-spacing: -0.3px; }
+    .logo-mark { width: 30px; height: 30px; background: rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); }
+    .logo-text { font-size: 15px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-badge { margin-left: auto; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); }
+
+    /* ── HERO BG ── */
+    .hero-bg {
+      background: linear-gradient(160deg, #0a3d4a 0%, #09748B 55%, #0d8fa6 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 60% 30%, rgba(255,255,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* Dot grid decoration */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
 
     /* ── HERO ── */
-    .hero { padding: 80px 40px 72px; text-align: center; max-width: 680px; margin: 0 auto; }
-    .eyebrow { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; }
-    h1 { font-size: 44px; font-weight: 800; line-height: 1.13; letter-spacing: -1.5px; color: var(--charcoal); margin-bottom: 20px; }
-    .hero-sub { font-size: 17px; color: var(--body); line-height: 1.65; max-width: 500px; margin: 0 auto 36px; }
-    .trust-row { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--muted); font-weight: 500; }
-    .trust-row span { display: flex; align-items: center; gap: 6px; }
-    .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-mid); flex-shrink: 0; }
+    .hero { padding: 80px 40px 96px; text-align: center; max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75); margin-bottom: 24px;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      padding: 5px 14px; border-radius: 999px;
+    }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #7de8c8; flex-shrink: 0; }
+    h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: white; margin-bottom: 22px; }
+    h1 em { font-style: normal; color: #7dd6e8; }
+    .hero-sub { font-size: 17px; color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 480px; margin: 0 auto 40px; }
+    .trust-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .trust-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      padding: 5px 13px; border-radius: 999px;
+    }
+    .trust-pill svg { opacity: 0.7; flex-shrink: 0; }
+
+    /* Hero wave */
+    .hero-wave { display: block; margin-bottom: -2px; position: relative; z-index: 1; }
 
     /* ── FORM SECTION ── */
     .form-section { background: var(--bg-soft); padding: 0 24px 80px; }
@@ -210,20 +252,37 @@
     .fade-up { animation: fadeUp 0.3s ease forwards; }
 
     /* ── NEXT STEPS ── */
-    .next-section { padding: 56px 40px 72px; max-width: 540px; margin: 0 auto; }
-    .next-section .label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
-    .steps { display: flex; flex-direction: column; }
-    .step { display: flex; gap: 18px; padding-bottom: 26px; position: relative; }
-    .step:not(:last-child)::before { content: ''; position: absolute; left: 13px; top: 28px; bottom: 0; width: 1px; background: var(--border); }
-    .step-num { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--teal); flex-shrink: 0; position: relative; z-index: 1; }
-    .step-body { padding-top: 3px; }
-    .step-body strong { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
-    .step-body p { font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .next-section { padding: 72px 40px 80px; background: #f0f7f9; }
+    .next-section-inner { max-width: 720px; margin: 0 auto; }
+    .next-section .label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 10px; display: block; text-align: center;
+    }
+    .next-section .label-heading {
+      font-size: 26px; font-weight: 800; letter-spacing: -0.8px;
+      color: var(--charcoal); text-align: center; margin-bottom: 48px;
+    }
+    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .step {
+      background: var(--white); border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--teal-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; color: var(--teal);
+      flex-shrink: 0;
+    }
+    .step-body strong { display: block; font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 5px; }
+    .step-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
     /* ── FEEDBACK ── */
-    .feedback-section { border-top: 1px solid var(--border); padding: 48px 40px; text-align: center; background: var(--bg-soft); }
-    .fb-title { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 5px; }
-    .fb-sub { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+    .feedback-section { padding: 56px 40px; text-align: center; background: var(--white); border-top: 1px solid var(--border); }
+    .fb-title { font-size: 17px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; letter-spacing: -0.3px; }
+    .fb-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
     .feedback-btns { display: flex; justify-content: center; gap: 10px; }
     .fb-btn { display: flex; align-items: center; gap: 7px; padding: 9px 20px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--white); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--body); cursor: pointer; transition: all 0.12s ease; }
     .fb-btn:hover { border-color: var(--teal); color: var(--teal); }
@@ -235,14 +294,15 @@
     footer { padding: 18px 40px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--muted); }
     footer span { color: var(--teal); font-weight: 600; }
 
-    @media (max-width: 600px) {
-      nav { padding: 16px 20px; }
-      .hero { padding: 52px 24px 56px; }
-      h1 { font-size: 32px; }
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .hero { padding: 52px 24px 80px; }
+      h1 { font-size: 34px; letter-spacing: -1.2px; }
       .form-section { padding: 0 16px 60px; }
-      .next-section { padding: 48px 24px 56px; }
-      .feedback-section { padding: 40px 24px; }
-      .trust-row { gap: 14px; }
+      .next-section { padding: 52px 20px 64px; }
+      .steps { grid-template-columns: 1fr; }
+      .feedback-section { padding: 44px 24px; }
+      .trust-row { gap: 8px; }
     }
   </style>
 </head>
@@ -260,22 +320,40 @@
       </div>
       <span class="logo-text">Carefam</span>
     </a>
+    <span class="nav-badge">Hiring Sync</span>
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <span class="eyebrow">Hiring Needs Sync</span>
-    <h1>Your open roles,<br />synced in 60 seconds.</h1>
-    <p class="hero-sub">
-      Fill this out and your hiring needs go straight to the Carefam team.
-      We share it internally, start sourcing, and follow up within 24 hours.
-    </p>
-    <div class="trust-row">
-      <span><span class="trust-dot"></span>No login required</span>
-      <span><span class="trust-dot"></span>Shared with your full team</span>
-      <span><span class="trust-dot"></span>Sourcing starts immediately</span>
-    </div>
-  </section>
+  <div class="hero-bg">
+    <section class="hero">
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        New from Carefam
+      </span>
+      <h1>Your open roles,<br />synced in <em>60 seconds</em>.</h1>
+      <p class="hero-sub">
+        Fill this out and your hiring needs go straight to the Carefam team.
+        We share it internally, start sourcing, and follow up within 24 hours.
+      </p>
+      <div class="trust-row">
+        <span class="trust-pill">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          No login required
+        </span>
+        <span class="trust-pill">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Shared with your full team
+        </span>
+        <span class="trust-pill">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Sourcing starts immediately
+        </span>
+      </div>
+    </section>
+    <svg class="hero-wave" viewBox="0 0 1440 56" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:56px;">
+      <path d="M0,28 C240,56 480,0 720,28 C960,56 1200,8 1440,28 L1440,56 L0,56 Z" fill="#f6fafb"/>
+    </svg>
+  </div>
 
   <!-- FORM -->
   <div class="form-section">
@@ -386,27 +464,30 @@
 
   <!-- WHAT HAPPENS NEXT -->
   <section class="next-section">
-    <p class="label">What happens after you submit</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <strong>Your team is in the loop</strong>
-          <p>The request goes to every Carefam recruiter on your account. No forwarding, no follow-up needed.</p>
+    <div class="next-section-inner">
+      <span class="label">After you submit</span>
+      <h2 class="label-heading">We take it from there.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>Your team is in the loop</strong>
+            <p>The request goes to every Carefam recruiter on your account. No forwarding, no follow-up needed.</p>
+          </div>
         </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <strong>Sourcing starts right away</strong>
-          <p>We match your needs against active candidates in the pipeline and start outreach the same day.</p>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>Sourcing starts right away</strong>
+            <p>We match your needs against active candidates in the pipeline and start outreach the same day.</p>
+          </div>
         </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <strong>You review, we place</strong>
-          <p>Approve the candidates we surface and we take care of scheduling, paperwork, and placement.</p>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>You review, we place</strong>
+            <p>Approve the candidates we surface and we handle scheduling, paperwork, and placement.</p>
+          </div>
         </div>
       </div>
     </div>
