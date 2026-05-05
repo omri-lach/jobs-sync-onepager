@@ -756,7 +756,8 @@
         await fetch(SLACK_WEBHOOK_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: JSON.stringify({ text: lines })
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'payload=' + encodeURIComponent(JSON.stringify({ text: lines }))
         });
       } catch (e) {
         console.warn('Slack notification failed:', e);
