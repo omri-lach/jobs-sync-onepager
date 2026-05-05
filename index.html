@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carefam - Hiring Needs Sync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #09748B;
+      --teal-dark: #075e70;
+      --teal-light: #e8f3f6;
+      --teal-mid: #c8e4ea;
+      --charcoal: #1c2b2d;
+      --body: #3d4f51;
+      --muted: #7a9296;
+      --border: #dde8ea;
+      --bg-soft: #f6fafb;
+      --white: #ffffff;
+    }
+
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--charcoal); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav { padding: 20px 40px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark { width: 30px; height: 30px; background: var(--teal); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .logo-text { font-size: 15px; font-weight: 700; color: var(--charcoal); letter-spacing: -0.3px; }
+
+    /* ── HERO ── */
+    .hero { padding: 80px 40px 72px; text-align: center; max-width: 680px; margin: 0 auto; }
+    .eyebrow { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; }
+    h1 { font-size: 44px; font-weight: 800; line-height: 1.13; letter-spacing: -1.5px; color: var(--charcoal); margin-bottom: 20px; }
+    .hero-sub { font-size: 17px; color: var(--body); line-height: 1.65; max-width: 500px; margin: 0 auto 36px; }
+    .trust-row { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--muted); font-weight: 500; }
+    .trust-row span { display: flex; align-items: center; gap: 6px; }
+    .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-mid); flex-shrink: 0; }
+
+    /* ── FORM SECTION ── */
+    .form-section { background: var(--bg-soft); padding: 0 24px 80px; }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      max-width: 480px; margin: 0 auto;
+      background: var(--bg-soft);
+      border-radius: 20px; border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(9,116,139,0.05), 0 16px 48px rgba(9,116,139,0.09);
+      overflow: hidden; position: relative; top: -32px;
+    }
+
+    /* Card header */
+    .card-head { padding: 20px 20px 18px; background: var(--bg-soft); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+    .card-head-icon { width: 36px; height: 36px; border-radius: 9px; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: white; flex-shrink: 0; transition: all 0.2s; }
+    .card-head-title { font-size: 15px; font-weight: 700; color: var(--charcoal); letter-spacing: -0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-head-sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+
+    /* Intro fields */
+    .intro-fields { padding: 20px 20px 0; display: flex; flex-direction: column; gap: 12px; }
+    .intro-fields input { width: 100%; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--charcoal); background: var(--white); border: 1.5px solid var(--border); border-radius: 9px; padding: 9px 13px; outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+    .intro-fields input::placeholder { color: #b8cdd0; }
+    .intro-fields input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(9,116,139,0.1); }
+
+    /* Counter form body */
+    .form-body { padding: 20px; }
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+    /* Role card */
+    .role-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); margin-bottom: 10px; overflow: hidden; }
+    .role-card-header { padding: 12px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eef3f4; }
+    .role-badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 5px; background: var(--teal); font-size: 10px; font-weight: 700; color: white; letter-spacing: 0.04em; flex-shrink: 0; }
+    .role-name { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+
+    /* Counter row */
+    .count-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #eef3f4; }
+    .count-row:last-child { border-bottom: none; }
+    .count-label { font-size: 13px; font-weight: 400; color: var(--body); flex: 1; }
+    .counter { display: flex; align-items: center; gap: 12px; }
+    .cnt-btn { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--border); background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.12s ease; flex-shrink: 0; padding: 0; }
+    .cnt-btn svg { pointer-events: none; }
+    .cnt-btn:hover { border-color: var(--teal); }
+    .cnt-btn.on { background: var(--teal); border-color: var(--teal); }
+    .cnt-val { font-size: 15px; font-weight: 600; color: var(--muted); width: 18px; text-align: center; transition: color 0.12s; }
+    .cnt-val.on { color: var(--charcoal); }
+
+    /* Additional needs */
+    .additional-field { margin-top: 14px; }
+    .additional-field label { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 7px; }
+    .additional-field textarea { width: 100%; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--charcoal); background: var(--white); border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 13px; resize: none; outline: none; transition: border-color 0.15s, box-shadow 0.15s; line-height: 1.5; }
+    .additional-field textarea::placeholder { color: #b8cdd0; }
+    .additional-field textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(9,116,139,0.1); }
+
+    /* Submit */
+    .form-footer { padding: 0 20px 24px; }
+    .submit-btn { width: 100%; background: var(--teal); color: white; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; border: none; border-radius: 999px; padding: 13px 24px; cursor: pointer; transition: background 0.15s, transform 0.1s; letter-spacing: -0.1px; margin-top: 16px; }
+    .submit-btn:hover { background: var(--teal-dark); }
+    .submit-btn:active { transform: scale(0.99); }
+    .form-note { text-align: center; font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+    /* ── OUTPUT / SUCCESS STATE ── */
+    #output-state { display: none; }
+
+    .output-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 16px 20px;
+      background: #edf8f4;
+      border-bottom: 1px solid #c6e9de;
+    }
+    .output-check {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #27ae74; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .output-header-text { font-size: 13px; font-weight: 600; color: #1a5c3a; }
+    .output-header-sub { font-size: 11px; color: #4a9a70; margin-top: 1px; }
+
+    .output-body { padding: 18px 20px 20px; }
+    .output-section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+
+    .output-role-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+    .output-role-head { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid #eef3f4; }
+    .output-role-name { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+    .output-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid #eef3f4; }
+    .output-row:last-child { border-bottom: none; }
+    .output-row-label { font-size: 13px; color: var(--body); }
+    .output-row-count { font-size: 14px; font-weight: 700; color: var(--teal); min-width: 20px; text-align: right; }
+
+    .output-notes { margin-top: 12px; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .output-notes-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 5px; }
+    .output-notes p { font-size: 13px; color: var(--body); line-height: 1.55; font-style: italic; }
+
+    .output-empty { font-size: 13px; color: var(--muted); font-style: italic; padding: 8px 0; }
+
+    /* ── SPREADSHEET PREVIEW ── */
+    .sheet-block { margin-top: 18px; }
+    .sheet-block-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .sheet-scroll {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid #c8d6d9;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .sheet-table {
+      border-collapse: collapse;
+      font-size: 11px;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      min-width: 100%;
+    }
+    /* Column-letter bar */
+    .sheet-table .col-row td {
+      background: #e8eaed;
+      color: #80868b;
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      padding: 2px 6px;
+      border-right: 1px solid #d2d5d9;
+      border-bottom: 1px solid #bec2c8;
+      user-select: none;
+    }
+    /* Row-number cells */
+    .sheet-table td.rn {
+      background: #f1f3f4;
+      color: #9aa0a6;
+      font-size: 10px;
+      text-align: center;
+      padding: 4px 7px;
+      border-right: 1px solid #d2d5d9;
+      border-bottom: 1px solid #e8eaed;
+      min-width: 26px;
+      user-select: none;
+    }
+    .sheet-table tr.col-row td.rn { background: #e8eaed; border-bottom: 1px solid #bec2c8; }
+    .sheet-table tr.hrow td.rn    { background: #c6dbbf; border-bottom: 1px solid #aacba0; border-right: 1px solid #aacba0; }
+    /* Header row */
+    .sheet-table .hrow td {
+      background: #d3e8cc;
+      color: #2d5a27;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-right: 1px solid #aacba0;
+      border-bottom: 1px solid #aacba0;
+    }
+    /* Data rows */
+    .sheet-table .drow td {
+      background: #ffffff;
+      color: var(--charcoal);
+      padding: 4px 10px;
+      border-right: 1px solid #e8eaed;
+      border-bottom: 1px solid #e8eaed;
+    }
+    .sheet-table .drow:nth-child(odd) td { background: #f8fafb; }
+    .sheet-table .drow td.rn { background: #f1f3f4; }
+    .sheet-table .drow:nth-child(odd) td.rn { background: #edf0f1; }
+    .sheet-table td.count-cell { text-align: center; font-weight: 600; color: var(--teal); }
+    .sheet-table td.muted-cell { color: #b0bec0; font-style: italic; }
+
+    .reset-link { display: inline-block; margin: 16px 20px 20px; font-size: 12px; font-weight: 500; color: var(--muted); cursor: pointer; text-decoration: none; transition: color 0.1s; }
+    .reset-link:hover { color: var(--teal); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.3s ease forwards; }
+
+    /* ── NEXT STEPS ── */
+    .next-section { padding: 56px 40px 72px; max-width: 540px; margin: 0 auto; }
+    .next-section .label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+    .steps { display: flex; flex-direction: column; }
+    .step { display: flex; gap: 18px; padding-bottom: 26px; position: relative; }
+    .step:not(:last-child)::before { content: ''; position: absolute; left: 13px; top: 28px; bottom: 0; width: 1px; background: var(--border); }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--teal); flex-shrink: 0; position: relative; z-index: 1; }
+    .step-body { padding-top: 3px; }
+    .step-body strong { display: block; font-size: 13px; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
+    .step-body p { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+    /* ── FEEDBACK ── */
+    .feedback-section { border-top: 1px solid var(--border); padding: 48px 40px; text-align: center; background: var(--bg-soft); }
+    .fb-title { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 5px; }
+    .fb-sub { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+    .feedback-btns { display: flex; justify-content: center; gap: 10px; }
+    .fb-btn { display: flex; align-items: center; gap: 7px; padding: 9px 20px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--white); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--body); cursor: pointer; transition: all 0.12s ease; }
+    .fb-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .fb-btn.active { background: var(--teal-light); border-color: var(--teal); color: var(--teal); font-weight: 600; }
+    .fb-thanks { display: none; margin-top: 16px; font-size: 12px; color: var(--muted); }
+    .fb-thanks.show { display: block; }
+
+    /* ── FOOTER ── */
+    footer { padding: 18px 40px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--muted); }
+    footer span { color: var(--teal); font-weight: 600; }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 52px 24px 56px; }
+      h1 { font-size: 32px; }
+      .form-section { padding: 0 16px 60px; }
+      .next-section { padding: 48px 24px 56px; }
+      .feedback-section { padding: 40px 24px; }
+      .trust-row { gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="#">
+      <div class="logo-mark">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+          <path d="M10 3C6.13 3 3 6.13 3 10s3.13 7 7 7c1.55 0 2.99-.5 4.15-1.35" stroke="white" stroke-width="1.75" stroke-linecap="round"/>
+          <path d="M10 6.5v3.8l2.5 1.5" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="logo-text">Carefam</span>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="eyebrow">Hiring Needs Sync</span>
+    <h1>Your open roles,<br />synced in 60 seconds.</h1>
+    <p class="hero-sub">
+      Fill this out and your hiring needs go straight to the Carefam team.
+      We share it internally, start sourcing, and follow up within 24 hours.
+    </p>
+    <div class="trust-row">
+      <span><span class="trust-dot"></span>No login required</span>
+      <span><span class="trust-dot"></span>Shared with your full team</span>
+      <span><span class="trust-dot"></span>Sourcing starts immediately</span>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <div class="form-section">
+    <div class="form-card" id="form-card">
+
+      <!-- Dynamic header (always visible) -->
+      <div class="card-head">
+        <div class="card-head-icon" id="head-icon">?</div>
+        <div>
+          <div class="card-head-title" id="head-title">Your facility</div>
+          <div class="card-head-sub" id="head-sub">Your name</div>
+        </div>
+      </div>
+
+      <!-- ── FORM ── -->
+      <div id="form-view">
+        <div class="intro-fields" id="intro-fields">
+          <input type="text" id="field-facility" placeholder="Facility name (e.g. Greenfield LTAC)" oninput="updateHeader()" />
+          <input type="text" id="field-name" placeholder="Your name" oninput="updateHeader()" />
+        </div>
+
+        <div class="form-body">
+          <p class="section-label">How many do you need?</p>
+
+          <!-- RN -->
+          <div class="role-card">
+            <div class="role-card-header">
+              <span class="role-badge">RN</span>
+              <span class="role-name">Registered Nurse</span>
+            </div>
+            <div class="count-row"><span class="count-label">Full Time</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Nights</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Mornings</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Per Diem</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+          </div>
+
+          <!-- CNA -->
+          <div class="role-card">
+            <div class="role-card-header">
+              <span class="role-badge">CNA</span>
+              <span class="role-name">Certified Nursing Assistant</span>
+            </div>
+            <div class="count-row"><span class="count-label">Full Time</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Nights</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Mornings</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Per Diem</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+          </div>
+
+          <!-- LPN -->
+          <div class="role-card">
+            <div class="role-card-header">
+              <span class="role-badge">LPN</span>
+              <span class="role-name">Licensed Practical Nurse</span>
+            </div>
+            <div class="count-row"><span class="count-label">Full Time</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Nights</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Mornings</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+            <div class="count-row"><span class="count-label">Per Diem</span><div class="counter"><button class="cnt-btn btn-minus" onclick="change(this,-1)"><svg width="10" height="10" viewBox="0 0 12 2" fill="none"><path d="M1 1h10" stroke="#7a9296" stroke-width="1.8" stroke-linecap="round"/></svg></button><span class="cnt-val">0</span><button class="cnt-btn btn-plus on" onclick="change(this,1)"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
+          </div>
+
+          <div class="additional-field">
+            <label>Additional needs</label>
+            <textarea id="field-notes" rows="3" placeholder="e.g. OT per diem, PT full time, weekend-only shifts..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button class="submit-btn" onclick="submitForm()">Submit hiring request</button>
+          <p class="form-note">Goes directly to your Carefam team. No account needed.</p>
+        </div>
+      </div>
+
+      <!-- ── OUTPUT VIEW ── -->
+      <div id="output-state">
+        <div class="output-header">
+          <div class="output-check">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <div>
+            <div class="output-header-text">Request submitted</div>
+            <div class="output-header-sub">Carefam team has been notified</div>
+          </div>
+        </div>
+
+        <div class="output-body">
+          <p class="output-section-label">Positions requested</p>
+          <div id="output-roles"></div>
+          <div id="output-notes-block" style="display:none">
+            <div class="output-notes">
+              <span class="output-notes-label">Additional needs</span>
+              <p id="output-notes-text"></p>
+            </div>
+          </div>
+
+          <div class="sheet-block" id="output-sheet" style="display:none">
+            <p class="sheet-block-label">How it's saved in your spreadsheet</p>
+            <div class="sheet-scroll">
+              <table class="sheet-table" id="sheet-table"></table>
+            </div>
+          </div>
+        </div>
+
+        <a class="reset-link" onclick="resetForm()">Submit another request</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT HAPPENS NEXT -->
+  <section class="next-section">
+    <p class="label">What happens after you submit</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Your team is in the loop</strong>
+          <p>The request goes to every Carefam recruiter on your account. No forwarding, no follow-up needed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Sourcing starts right away</strong>
+          <p>We match your needs against active candidates in the pipeline and start outreach the same day.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>You review, we place</strong>
+          <p>Approve the candidates we surface and we take care of scheduling, paperwork, and placement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <div class="feedback-section">
+    <p class="fb-title">Was this easier than your usual process?</p>
+    <p class="fb-sub">We're always looking to improve how this works for you.</p>
+    <div class="feedback-btns">
+      <button class="fb-btn" id="fb-up" onclick="giveFeedback('up')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+        Yes, much easier
+      </button>
+      <button class="fb-btn" id="fb-down" onclick="giveFeedback('down')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
+        Not really
+      </button>
+    </div>
+    <p class="fb-thanks" id="fb-thanks">Thanks. That goes straight to the product team.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Powered by <span>Carefam</span> &nbsp;·&nbsp; Built for healthcare teams
+  </footer>
+
+  <script>
+    // ─────────────────────────────────────────────
+    // CONFIGURE: paste your Slack Incoming Webhook URL here
+    // Setup: slack.com/apps/A0F7XDUAZ-incoming-webhooks
+    const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+    // ─────────────────────────────────────────────
+
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const now = new Date();
+    const monthYear = MONTHS[now.getMonth()] + ' ' + now.getFullYear();
+
+    let lastSubmission = null; // stored on submit, sent to Slack on feedback
+
+    // ── Header live update ──
+    function updateHeader() {
+      const facility = document.getElementById('field-facility').value.trim();
+      const name = document.getElementById('field-name').value.trim();
+      document.getElementById('head-icon').textContent = facility ? facility[0].toUpperCase() : '?';
+      document.getElementById('head-title').textContent = facility ? facility + ' \u00b7 ' + monthYear : 'Your facility';
+      document.getElementById('head-sub').textContent = name || 'Your name';
+    }
+
+    // ── Counter buttons ──
+    function change(btn, delta) {
+      const row = btn.closest('.count-row');
+      const valEl = row.querySelector('.cnt-val');
+      const minus = row.querySelector('.btn-minus');
+      const plus  = row.querySelector('.btn-plus');
+      let val = parseInt(valEl.textContent) + delta;
+      if (val < 0) val = 0;
+      valEl.textContent = val;
+      const on = val > 0;
+      valEl.classList.toggle('on', on);
+      minus.classList.toggle('on', on);
+      minus.querySelector('path').setAttribute('stroke', on ? 'white' : '#7a9296');
+      plus.classList.add('on'); // plus always teal
+    }
+
+    // ── Collect form data ──
+    function collectData() {
+      const facility = document.getElementById('field-facility').value.trim();
+      const name     = document.getElementById('field-name').value.trim();
+      const notes    = document.getElementById('field-notes').value.trim();
+      const roles = [];
+      document.querySelectorAll('.role-card').forEach(card => {
+        const abbr     = card.querySelector('.role-badge').textContent.trim();
+        const roleName = card.querySelector('.role-name').textContent.trim();
+        const rows = [];
+        card.querySelectorAll('.count-row').forEach(row => {
+          const label = row.querySelector('.count-label').textContent.trim();
+          const val   = parseInt(row.querySelector('.cnt-val').textContent);
+          if (val > 0) rows.push({ label, val });
+        });
+        if (rows.length) roles.push({ abbr, name: roleName, rows });
+      });
+      return { facility, name, notes, roles };
+    }
+
+    // ── Submit ──
+    function submitForm() {
+      const facility = document.getElementById('field-facility').value.trim();
+      const name     = document.getElementById('field-name').value.trim();
+      if (!facility) { highlight('field-facility'); return; }
+      if (!name)     { highlight('field-name'); return; }
+
+      lastSubmission = collectData();
+      renderOutput(lastSubmission);
+
+      document.getElementById('form-view').style.display = 'none';
+      const out = document.getElementById('output-state');
+      out.style.display = 'block';
+      out.classList.add('fade-up');
+    }
+
+    function highlight(id) {
+      const el = document.getElementById(id);
+      el.style.borderColor = '#09748B';
+      el.focus();
+    }
+
+    // ── Render output ──
+    function renderOutput(data) {
+      // Role summary cards
+      const container = document.getElementById('output-roles');
+      if (!data.roles.length) {
+        container.innerHTML = '<p class="output-empty">No specific counts added.</p>';
+      } else {
+        container.innerHTML = data.roles.map(role => `
+          <div class="output-role-card">
+            <div class="output-role-head">
+              <span class="role-badge">${role.abbr}</span>
+              <span class="output-role-name">${role.name}</span>
+            </div>
+            ${role.rows.map(r => `
+              <div class="output-row">
+                <span class="output-row-label">${r.label}</span>
+                <span class="output-row-count">${r.val}</span>
+              </div>
+            `).join('')}
+          </div>
+        `).join('');
+      }
+
+      // Notes
+      const notesBlock = document.getElementById('output-notes-block');
+      if (data.notes) {
+        document.getElementById('output-notes-text').textContent = data.notes;
+        notesBlock.style.display = 'block';
+      } else {
+        notesBlock.style.display = 'none';
+      }
+
+      // Spreadsheet preview
+      const cols = ['Facility', 'Month', 'Submitted by', 'Role', 'Shift / Type', 'Count', 'Notes'];
+      const colLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+
+      // Build one row per role+type combination
+      const sheetRows = [];
+      let isFirst = true;
+      data.roles.forEach(role => {
+        role.rows.forEach(r => {
+          sheetRows.push({
+            facility: data.facility,
+            month: monthYear,
+            submittedBy: data.name,
+            role: role.name,
+            type: r.label,
+            count: r.val,
+            notes: isFirst ? (data.notes || '') : ''
+          });
+          isFirst = false;
+        });
+      });
+      // If nothing filled in, still show a placeholder row
+      if (!sheetRows.length) {
+        sheetRows.push({ facility: data.facility, month: monthYear, submittedBy: data.name, role: '', type: '', count: '', notes: data.notes || '' });
+      }
+
+      let tableHTML = '';
+
+      // Column-letter bar
+      tableHTML += '<tr class="col-row"><td class="rn"></td>';
+      colLetters.forEach(l => { tableHTML += `<td>${l}</td>`; });
+      tableHTML += '</tr>';
+
+      // Header row (row 1)
+      tableHTML += '<tr class="hrow"><td class="rn">1</td>';
+      cols.forEach(c => { tableHTML += `<td>${c}</td>`; });
+      tableHTML += '</tr>';
+
+      // Data rows
+      sheetRows.forEach((row, i) => {
+        const cells = [row.facility, row.month, row.submittedBy, row.role, row.type, row.count, row.notes];
+        tableHTML += `<tr class="drow"><td class="rn">${i + 2}</td>`;
+        cells.forEach((cell, ci) => {
+          const cls = ci === 5 ? ' count-cell' : (cell === '' ? ' muted-cell' : '');
+          tableHTML += `<td class="${cls}">${cell === '' ? '\u2014' : cell}</td>`;
+        });
+        tableHTML += '</tr>';
+      });
+
+      document.getElementById('sheet-table').innerHTML = tableHTML;
+      document.getElementById('output-sheet').style.display = 'block';
+    }
+
+    // ── Reset ──
+    function resetForm() {
+      document.getElementById('field-facility').value = '';
+      document.getElementById('field-name').value = '';
+      document.getElementById('field-notes').value = '';
+      updateHeader();
+      document.querySelectorAll('.cnt-val').forEach(el => { el.textContent = '0'; el.classList.remove('on'); });
+      document.querySelectorAll('.btn-minus').forEach(btn => {
+        btn.classList.remove('on');
+        btn.querySelector('path').setAttribute('stroke', '#7a9296');
+      });
+      document.getElementById('form-view').style.display = '';
+      const out = document.getElementById('output-state');
+      out.style.display = 'none';
+      out.classList.remove('fade-up');
+      document.getElementById('output-sheet').style.display = 'none';
+      document.getElementById('sheet-table').innerHTML = '';
+      lastSubmission = null;
+    }
+
+    // ── Feedback + Slack ──
+    function giveFeedback(type) {
+      document.getElementById('fb-up').classList.toggle('active', type === 'up');
+      document.getElementById('fb-down').classList.toggle('active', type === 'down');
+      document.getElementById('fb-thanks').classList.add('show');
+      if (SLACK_WEBHOOK_URL) sendToSlack(type);
+    }
+
+    async function sendToSlack(feedbackType) {
+      const data = lastSubmission || { facility: '(not submitted)', name: '', roles: [], notes: '' };
+      const emoji = feedbackType === 'up' ? '👍' : '👎';
+
+      const posLines = data.roles.flatMap(r =>
+        r.rows.map(row => `• ${r.abbr} ${row.label}: *${row.val}*`)
+      );
+
+      const blocks = [
+        { type: 'header', text: { type: 'plain_text', text: `${emoji} Hiring Sync Feedback` } },
+        {
+          type: 'section',
+          fields: [
+            { type: 'mrkdwn', text: `*Facility:*\n${data.facility} \u00b7 ${monthYear}` },
+            { type: 'mrkdwn', text: `*Submitted by:*\n${data.name || 'N/A'}` },
+          ]
+        },
+        ...(posLines.length ? [{
+          type: 'section',
+          text: { type: 'mrkdwn', text: `*Positions requested:*\n${posLines.join('\n')}` }
+        }] : []),
+        ...(data.notes ? [{
+          type: 'section',
+          text: { type: 'mrkdwn', text: `*Additional needs:*\n${data.notes}` }
+        }] : []),
+        {
+          type: 'section',
+          text: { type: 'mrkdwn', text: `*Was this easier than their usual process?* ${feedbackType === 'up' ? 'Yes 👍' : 'Not really 👎'}` }
+        }
+      ];
+
+      try {
+        await fetch(SLACK_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors', // required for browser-to-Slack
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ blocks })
+        });
+      } catch (e) {
+        console.warn('Slack notification failed:', e);
+      }
+    }
+  </script>
+
+</body>
+</html>
