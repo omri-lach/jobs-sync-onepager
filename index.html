@@ -28,61 +28,91 @@
 
     /* ── NAV ── */
     nav {
-      padding: 18px 40px; display: flex; align-items: center; gap: 10px;
-      background: #0a3d4a;
+      padding: 20px 48px; display: flex; align-items: center; gap: 12px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
       position: relative; z-index: 10;
     }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-mark { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .logo-mark {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      padding: 6px;
+    }
     .logo-mark img { width: 100%; height: 100%; object-fit: contain; display: block; filter: brightness(0) invert(1); }
-    .logo-text { font-size: 15px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .logo-text { font-size: 16px; font-weight: 700; color: var(--charcoal); letter-spacing: -0.4px; }
 
     /* ── HERO BG ── */
-    .hero-bg {
-      background: linear-gradient(160deg, #0a3d4a 0%, #09748B 55%, #0d8fa6 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 60% 30%, rgba(255,255,255,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    /* Dot grid decoration */
-    .hero-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 28px 28px;
-      pointer-events: none;
-    }
+    .hero-bg { background: var(--white); }
 
     /* ── HERO ── */
-    .hero { padding: 80px 40px 96px; text-align: center; max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero { padding: 100px 48px 72px; text-align: center; max-width: 760px; margin: 0 auto; }
+
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(255,255,255,0.75); margin-bottom: 24px;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
-      padding: 5px 14px; border-radius: 999px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 28px;
     }
-    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #7de8c8; flex-shrink: 0; }
-    h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; color: white; margin-bottom: 22px; }
-    h1 em { font-style: normal; color: #7dd6e8; }
-    .hero-sub { font-size: 17px; color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 480px; margin: 0 auto 40px; }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); flex-shrink: 0; opacity: 0.5; }
+
+    h1 {
+      font-size: 62px; font-weight: 800;
+      line-height: 1.06; letter-spacing: -3px;
+      color: var(--charcoal); margin-bottom: 26px;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--teal);
+      position: relative;
+      white-space: nowrap;
+    }
+    h1 em::after {
+      content: '';
+      position: absolute; left: 0; right: 0;
+      bottom: 4px; height: 4px;
+      background: var(--teal); opacity: 0.25;
+      border-radius: 2px;
+    }
+
+    .hero-sub {
+      font-size: 18px; color: var(--body);
+      line-height: 1.7; max-width: 500px;
+      margin: 0 auto 44px;
+      font-weight: 400;
+    }
+
     .trust-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
     .trust-pill {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.8);
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
-      padding: 5px 13px; border-radius: 999px;
+      font-size: 12px; font-weight: 500;
+      color: var(--body);
+      background: var(--bg-soft); border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 999px;
     }
-    .trust-pill svg { opacity: 0.7; flex-shrink: 0; }
+    .trust-pill svg { color: var(--teal); flex-shrink: 0; }
 
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      display: flex; justify-content: center; align-items: stretch;
+      max-width: 560px; margin: 64px auto 0;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .stat {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      padding: 0 32px;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-size: 34px; font-weight: 800; letter-spacing: -1.5px;
+      color: var(--teal); line-height: 1; margin-bottom: 6px;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; text-align: center; line-height: 1.4; }
 
     /* ── FORM SECTION ── */
-    .form-section { background: var(--bg-soft); padding: 0 24px 80px; }
+    .form-section { background: #EAF4F7; padding: 0 24px 80px; }
 
     /* ── FORM CARD ── */
     .form-card {
@@ -250,37 +280,44 @@
     .fade-up { animation: fadeUp 0.3s ease forwards; }
 
     /* ── NEXT STEPS ── */
-    .next-section { padding: 72px 40px 80px; background: #f0f7f9; }
-    .next-section-inner { max-width: 720px; margin: 0 auto; }
+    .next-section { padding: 96px 48px 100px; background: var(--white); }
+    .next-section-inner { max-width: 760px; margin: 0 auto; }
     .next-section .label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--teal); margin-bottom: 10px; display: block; text-align: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 12px; display: block; text-align: center;
     }
     .next-section .label-heading {
-      font-size: 26px; font-weight: 800; letter-spacing: -0.8px;
-      color: var(--charcoal); text-align: center; margin-bottom: 48px;
+      font-size: 38px; font-weight: 800; letter-spacing: -1.5px;
+      color: var(--charcoal); text-align: center; margin-bottom: 60px; line-height: 1.1;
     }
-    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
     .step {
-      background: var(--white); border-radius: 14px;
+      background: var(--bg-soft); border-radius: 16px;
       border: 1px solid var(--border);
-      padding: 24px 22px;
-      display: flex; flex-direction: column; gap: 12px;
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      position: relative; overflow: hidden;
+    }
+    .step::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--teal); opacity: 0.3;
     }
     .step-num {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--teal-light);
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--teal);
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 800; color: var(--teal);
+      font-size: 14px; font-weight: 800; color: white;
       flex-shrink: 0;
     }
-    .step-body strong { display: block; font-size: 14px; font-weight: 700; color: var(--charcoal); margin-bottom: 5px; }
-    .step-body p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .step-body strong { display: block; font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; letter-spacing: -0.2px; }
+    .step-body p { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
     /* ── FEEDBACK ── */
-    .feedback-section { padding: 56px 40px; text-align: center; background: var(--white); border-top: 1px solid var(--border); }
-    .fb-title { font-size: 17px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; letter-spacing: -0.3px; }
-    .fb-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+    .feedback-section { padding: 72px 48px; text-align: center; background: #EAF4F7; border-top: 1px solid var(--border); }
+    .fb-title { font-size: 22px; font-weight: 800; color: var(--charcoal); margin-bottom: 8px; letter-spacing: -0.6px; }
+    .fb-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
     .feedback-btns { display: flex; justify-content: center; gap: 10px; }
     .fb-btn { display: flex; align-items: center; gap: 7px; padding: 9px 20px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--white); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--body); cursor: pointer; transition: all 0.12s ease; }
     .fb-btn:hover { border-color: var(--teal); color: var(--teal); }
@@ -289,18 +326,32 @@
     .fb-thanks.show { display: block; }
 
     /* ── FOOTER ── */
-    footer { padding: 18px 40px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--muted); }
-    footer span { color: var(--teal); font-weight: 600; }
+    footer {
+      padding: 40px 48px;
+      background: var(--charcoal);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo-mark { width: 28px; height: 28px; border-radius: 7px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; padding: 5px; }
+    .footer-logo-mark img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); }
+    .footer-logo-text { font-size: 14px; font-weight: 700; color: white; }
+    .footer-right { font-size: 12px; color: rgba(255,255,255,0.35); }
 
     @media (max-width: 640px) {
-      nav { padding: 14px 20px; }
-      .hero { padding: 52px 24px 80px; }
-      h1 { font-size: 34px; letter-spacing: -1.2px; }
+      nav { padding: 16px 24px; }
+      .hero { padding: 64px 24px 56px; }
+      h1 { font-size: 38px; letter-spacing: -1.8px; }
+      .hero-sub { font-size: 16px; }
+      .stats-strip { gap: 0; margin-top: 48px; padding-top: 40px; }
+      .stat { padding: 0 20px; }
+      .stat-num { font-size: 26px; }
       .form-section { padding: 0 16px 60px; }
-      .next-section { padding: 52px 20px 64px; }
+      .next-section { padding: 64px 24px 72px; }
+      .next-section .label-heading { font-size: 28px; }
       .steps { grid-template-columns: 1fr; }
-      .feedback-section { padding: 44px 24px; }
+      .feedback-section { padding: 52px 24px; }
       .trust-row { gap: 8px; }
+      footer { padding: 28px 24px; flex-direction: column; align-items: flex-start; gap: 12px; }
     }
   </style>
 </head>
@@ -331,17 +382,32 @@
       </p>
       <div class="trust-row">
         <span class="trust-pill">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           No login required
         </span>
         <span class="trust-pill">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
           Shared with your full team
         </span>
         <span class="trust-pill">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          Sourcing starts immediately
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          Sourcing starts same day
         </span>
+      </div>
+
+      <div class="stats-strip">
+        <div class="stat">
+          <span class="stat-num">60s</span>
+          <span class="stat-label">to submit a request</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">24h</span>
+          <span class="stat-label">follow-up guarantee</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-label">phone calls needed</span>
+        </div>
       </div>
     </section>
   </div>
@@ -503,7 +569,13 @@
 
   <!-- FOOTER -->
   <footer>
-    Powered by <span>Carefam</span> &nbsp;·&nbsp; Built for healthcare teams
+    <div class="footer-logo">
+      <div class="footer-logo-mark">
+        <img src="https://www.figma.com/api/mcp/asset/7a3a1a1d-696f-44c2-bba5-9359e0b287ea" alt="Carefam" />
+      </div>
+      <span class="footer-logo-text">Carefam</span>
+    </div>
+    <span class="footer-right">Built for healthcare teams &nbsp;·&nbsp; hello@carefam.com</span>
   </footer>
 
   <script>
@@ -704,37 +776,24 @@
       const emoji = feedbackType === 'up' ? '👍' : '👎';
 
       const posLines = data.roles.flatMap(r =>
-        r.rows.map(row => `• ${r.abbr} ${row.label}: *${row.val}*`)
+        r.rows.map(row => `• ${r.abbr} ${row.label}: ${row.val}`)
       );
 
-      const blocks = [
-        { type: 'header', text: { type: 'plain_text', text: `${emoji} Hiring Sync Feedback` } },
-        {
-          type: 'section',
-          fields: [
-            { type: 'mrkdwn', text: `*Facility:*\n${data.facility} \u00b7 ${monthYear}` },
-            { type: 'mrkdwn', text: `*Submitted by:*\n${data.name || 'N/A'}` },
-          ]
-        },
-        ...(posLines.length ? [{
-          type: 'section',
-          text: { type: 'mrkdwn', text: `*Positions requested:*\n${posLines.join('\n')}` }
-        }] : []),
-        ...(data.notes ? [{
-          type: 'section',
-          text: { type: 'mrkdwn', text: `*Additional needs:*\n${data.notes}` }
-        }] : []),
-        {
-          type: 'section',
-          text: { type: 'mrkdwn', text: `*Was this easier than their usual process?* ${feedbackType === 'up' ? 'Yes 👍' : 'Not really 👎'}` }
-        }
-      ];
+      const lines = [
+        `${emoji} *Hiring Sync Feedback*`,
+        `*Facility:* ${data.facility} · ${monthYear}`,
+        `*Submitted by:* ${data.name || 'N/A'}`,
+        posLines.length ? `*Positions:*\n${posLines.join('\n')}` : null,
+        data.notes ? `*Additional needs:* ${data.notes}` : null,
+        `*Was this easier?* ${feedbackType === 'up' ? 'Yes 👍' : 'Not really 👎'}`,
+      ].filter(Boolean).join('\n');
 
       try {
         await fetch(SLACK_WEBHOOK_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: JSON.stringify({ blocks })
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'payload=' + encodeURIComponent(JSON.stringify({ text: lines }))
         });
       } catch (e) {
         console.warn('Slack notification failed:', e);
