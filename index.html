@@ -6,6 +6,8 @@
   <title>Carefam - Hiring Needs Sync</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('k0PRE2rfM_XGZ0JuL');</script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -544,9 +546,9 @@
 
   <script>
     // ─────────────────────────────────────────────
-    // CONFIGURE: paste your Slack Incoming Webhook URL here
-    // Setup: slack.com/apps/A0F7XDUAZ-incoming-webhooks
-    const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+    // EmailJS config
+    const EMAILJS_SERVICE_ID  = 'service_5304llp';
+    const EMAILJS_TEMPLATE_ID = 'template_i80w60i';
     // ─────────────────────────────────────────────
 
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -732,47 +734,26 @@
       document.getElementById('fb-up').classList.toggle('active', type === 'up');
       document.getElementById('fb-down').classList.toggle('active', type === 'down');
       document.getElementById('fb-thanks').classList.add('show');
-      if (SLACK_WEBHOOK_URL) sendToSlack(type);
+      sendEmail(type);
     }
 
-    async function sendToSlack(feedbackType) {
+    async function sendEmail(feedbackType) {
       const data = lastSubmission || { facility: '(not submitted)', name: '', roles: [], notes: '' };
-      const emoji = feedbackType === 'up' ? '👍' : '👎';
 
       const posLines = data.roles.flatMap(r =>
-        r.rows.map(row => `• ${r.abbr} ${row.label}: ${row.val}`)
+        r.rows.map(row => `${r.abbr} ${row.label}: ${row.val}`)
       );
 
-      const lines = [
-        `${emoji} *Hiring Sync Feedback*`,
-        `*Facility:* ${data.facility} · ${monthYear}`,
-        `*Submitted by:* ${data.name || 'N/A'}`,
-        posLines.length ? `*Positions:*\n${posLines.join('\n')}` : null,
-        data.notes ? `*Additional needs:* ${data.notes}` : null,
-        `*Was this easier?* ${feedbackType === 'up' ? 'Yes 👍' : 'Not really 👎'}`,
-      ].filter(Boolean).join('\n');
-
       try {
-        // Use a hidden form POST to bypass CORS — browser sends it fire-and-forget
-        const payload = encodeURIComponent(JSON.stringify({ text: lines }));
-        let form = document.getElementById('_slack_form');
-        if (!form) {
-          const iframe = document.createElement('iframe');
-          iframe.name = '_slack_iframe';
-          iframe.style.display = 'none';
-          document.body.appendChild(iframe);
-          form = document.createElement('form');
-          form.id = '_slack_form';
-          form.method = 'POST';
-          form.target = '_slack_iframe';
-          form.style.display = 'none';
-          document.body.appendChild(form);
-        }
-        form.action = SLACK_WEBHOOK_URL;
-        form.innerHTML = `<input name="payload" value="${payload.replace(/"/g, '&quot;')}">`;
-        form.submit();
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          facility:     data.facility || '(not provided)',
+          submitted_by: data.name || 'N/A',
+          positions:    posLines.length ? posLines.join('\n') : '(none entered)',
+          notes:        data.notes || '(none)',
+          feedback:     feedbackType === 'up' ? 'Yes 👍' : 'Not really 👎',
+        });
       } catch (e) {
-        console.warn('Slack notification failed:', e);
+        console.warn('Email notification failed:', e);
       }
     }
   </script>
