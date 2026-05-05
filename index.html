@@ -753,12 +753,24 @@
       ].filter(Boolean).join('\n');
 
       try {
-        await fetch(SLACK_WEBHOOK_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: 'payload=' + encodeURIComponent(JSON.stringify({ text: lines }))
-        });
+        // Use a hidden form POST to bypass CORS — browser sends it fire-and-forget
+        const payload = encodeURIComponent(JSON.stringify({ text: lines }));
+        let form = document.getElementById('_slack_form');
+        if (!form) {
+          const iframe = document.createElement('iframe');
+          iframe.name = '_slack_iframe';
+          iframe.style.display = 'none';
+          document.body.appendChild(iframe);
+          form = document.createElement('form');
+          form.id = '_slack_form';
+          form.method = 'POST';
+          form.target = '_slack_iframe';
+          form.style.display = 'none';
+          document.body.appendChild(form);
+        }
+        form.action = SLACK_WEBHOOK_URL;
+        form.innerHTML = `<input name="payload" value="${payload.replace(/"/g, '&quot;')}">`;
+        form.submit();
       } catch (e) {
         console.warn('Slack notification failed:', e);
       }
